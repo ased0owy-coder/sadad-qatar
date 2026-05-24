@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "بوابة سداد قطر"
+version = "1.0.0"
+id = "artifacts/sadad-qatar"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24240
+
+[services.development]
+run = "pnpm --filter @workspace/sadad-qatar run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sadad-qatar", "run", "build" ]
+publicDir = "artifacts/sadad-qatar/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24240"
+BASE_PATH = "/"
